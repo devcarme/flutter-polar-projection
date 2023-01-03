@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter polar projection',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter polar projection'),
     );
   }
 }
@@ -103,10 +103,6 @@ class _MyHomePageState extends State<MyHomePage> {
         zoom: 1,
         crs: epsg3413CRS,
         maxZoom: maxZoom,
-        onTap: (tapPosition, p) => setState(() {
-          initText = 'You clicked at';
-          point = proj4.Point(x: p.latitude, y: p.longitude);
-        }),
       ),
       children: [
         TileLayer(
@@ -114,9 +110,44 @@ class _MyHomePageState extends State<MyHomePage> {
             // Set the WMS layer's CRS too
             crs: epsg3413CRS,
             baseUrl:
+                //North
                 'https://www.gebco.net/data_and_products/gebco_web_services/north_polar_view_wms/mapserv?',
             layers: ['gebco_north_polar_view'],
           ),
+        ),
+        MarkerLayer(
+          markers: [
+            Marker(
+              point: LatLng(64.045691, -22.678106),
+              width: 80,
+              height: 80,
+              builder: (context) => const Icon(
+                Icons.location_on,
+                color: Colors.blue,
+                size: 40,
+              ),
+            ),
+            Marker(
+              point: LatLng(51.5287718, -0.2416805),
+              width: 80,
+              height: 80,
+              builder: (context) => const Icon(
+                Icons.location_on,
+                color: Colors.blue,
+                size: 40,
+              ),
+            ),
+            Marker(
+              point: LatLng(59.823567, -43.585796),
+              width: 80,
+              height: 80,
+              builder: (context) => const Icon(
+                Icons.location_on,
+                color: Colors.blue,
+                size: 40,
+              ),
+            ),
+          ],
         ),
       ],
     );
